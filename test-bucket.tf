@@ -99,6 +99,17 @@ resource "aws_s3_object" "object4" {
   # etag = "${md5(file("path/to/file"))}"
   etag = filemd5("./jenconle.png")
 }
+resource "aws_s3_object" "object5" {
+  bucket = aws_s3_bucket.frontend.bucket
+  key    = "images/jenconll.png"
+  source = "${path.module}/jenconll.png"
+  content_type = "image/png"
+
+  # The filemd5() function is available in Terraform 0.11.12 and later
+  # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
+  # etag = "${md5(file("path/to/file"))}"
+  etag = filemd5("./jenconll.png")
+}
 
 resource "aws_s3_bucket_website_configuration" "frontend_website" {
    bucket = aws_s3_bucket.frontend.id
